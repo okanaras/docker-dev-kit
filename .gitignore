@@ -1,0 +1,10 @@
+.idea
+mysql/*
+!mysql/mysql.txt
+redis/*
+!redis/redis.txt
+mysql8_1/*
+!mysql8_1/mysql8_1.txt
+
+# projects/*
+# !projects/testProje
