@@ -1,1 +1,7 @@
-* * * * * root /etc/php8.2/php /var/www/html/projeninYolu/ artisan schedule:run >> /dev/null 2>&1
+* * * * * root /etc/php8.2/php /var/www/html/eticaret/ artisan schedule:run >> /dev/null 2>&1
+
+* * * * * cd /var/www/html/eticaret/ && /usr/local/bin/php artisan schedule:run >> /dev/null 2>&1
+
+bu komutlari terminalde php containerina baglandiktan sonra crontab -e yazip en alta yapistiriyoruz. Daha sonra service cron restart komutunu birkez calistiriyoruz.
+
+Derste 2. komutla calistirdik

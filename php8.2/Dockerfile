@@ -41,7 +41,10 @@ RUN apt-get install -y nano
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN chown -R www-data:www-data /var/www/html/
-RUN chown -R www-data:www-data /var/www/html/
+
+# 135. derste eklendi
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord", "-c","/etc/supervisor/supervisord.conf"]
 
 #ben ekledim
 ENV PATH="/root/.composer/vendor/bin:${PATH}"

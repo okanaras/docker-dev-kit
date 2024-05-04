@@ -1,128 +1,114 @@
-# A. WSL Kurulumu & Kaldirma </br>
+### Docker Quick Start
 
-## 1- kurulum icin </br>
+1.  Kurulum icin:
 
-<b>"wsl --install"</b> koumutunu calistir. </br></br>
+        wsl --install
 
-## 2- varsayilan distro atama </br>
+2.  Varsayilan distro atama.
 
-'wsl --list' ile listele. Eger ki ubuntu default degilse asagidaki kodu calistir</br>
-wsl --setdefault DISTRO-NAME -> <b>wsl --setdefault Ubuntu</b></br></br>
+        wsl --list
+        wsl --setdefault DISTRO-NAME -> wsl --setdefault Ubuntu
 
-## 3- Sırasıyla aşağıdaki komutları girerek Ubuntu güncellemelerimizi ve gerekli paketlerimizi kuralım. </br>
+3.  Ubuntu güncellemelerimizi ve gerekli paketlerimizi kuralım.
 
-sudo apt update </br>
-sudo apt upgrade -y </br>
-sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates </br>
-sudo apt install git </br></br>
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
 
-## 4- NodeJS kuralumu. </br>
+4.  NodeJS kurulumu
 
-sudo apt-get update </br>
-sudo apt-get install -y ca-certificates curl gnupg </br>
-sudo mkdir -p /etc/apt/keyrings </br>
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg </br></br>
+        sudo apt-get update
+        sudo apt-get install -y ca-certificates curl gnupg
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
-NODE*MAJOR=20 </br>
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node*$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list </br></br>
+        NODE*MAJOR=20
+        echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node*$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 
-sudo apt-get update </br>
-sudo apt-get install nodejs -y </br></br>
+        sudo apt-get update
+        sudo apt-get install nodejs -y
 
-## 5- Alternative node npm kurulumu</br></br>
+5.  Alternative node npm kurulumu
 
-(a) sudo apt update -y</br>
-(b) sudo apt upgrade -y</br>
-(c) sudo apt-get install nodejs -y</br>
-(d) sudo apt install npm -y</br></br>
+        sudo apt update -y
+        sudo apt upgrade -y
+        sudo apt-get install nodejs -y
+        sudo apt install npm -y
 
-## 6- WSL Kaldirma </br></br>
+6.  WSL Kaldirma
 
-1- Uygulamalardan ubuntuyu kaldir. </br>
-2- terminalde <b>"wsl --list"</b> koumutunu calistir. </br>
-3- terminalde <b>"wsl --unregister Ubuntu"</b> koumutunu calistir. </br></br></br></br>
+        wsl --list
+        wsl --unregister Ubuntu
 
-# B. Github Kurulumu </br>
+7.  Github Kurulumu
 
-## 1- Asagidaki kodlar git kurulum kodlaridir hepsi ubuntu terminalinde calisacak! </br>
+        sudo apt install git
+        git --version
+        git config --global user.name "Okan Aras"
+        git config --global user.email "oknaras@icloud.com"
+        git config --global init.defaultBranch main
+        cat ~/.gitconfig
 
-sudo apt install git || git --version </br>
-git config --global user.name "Okan Aras" </br>
-git config --global user.email "oknaras@icloud.com" </br>
-git config --global init.defaultBranch main </br>
-cat ~/.gitconfig </br></br>
+8.  SSH kurulumu
 
-## 2- SSH kurulumu </br>
+        ssh-keygen -t rsa -b 4096 -C "okanaras"
+        code ~//.ssh/id_rsa.pub
 
-ssh-keygen -t rsa -b 4096 -C "okanaras" </br>
-cikan ekranda public key yazan bolumdeki /root/.ssh/id_rsa.pub yazan yerde asagidaki komutu yaziyoruz </br></br>
-<b>code ~//.ssh/id_rsa.pub</b> </br></br>
-komutu ile vscode ta key i aciyoruz ve key i kopyalayip github web te settings-ssh and gpg keys yerine girip yeni ssh ekliyoruz </br></br>
-title'a "Ubuntu-WSL" verdim "key tipi auth" ve "key e yukarda kopyaladigimi" verip ekledim </br></br>
+        ssh -T git@github.com
+        yes
 
-ssh -T git@github.com </br>
-<b>'yes'</b> diyoruz </br>
-en sonda "git clone 'sshlinki'" ile projeyi cekiyoruz </br></br></br></br>
+9.  Docker Desktop
 
-# C. Docker Desktop </br>
+        General bölümünde 'Use WSL 2 ve Use Docker Compose V2' seçili olsun.
+        Resources -> WSL Integration bölümünde Ubuntu seçeneğini aktif edelim.
+        Nginx default.conf'ta ayaga kalkacak path, domain ve php surumunu veriyoruz
+        Ardindan ../etc/hosts hosts dosyasina ayni domaini veriyoruz
 
-## Uygulama ayarlari
+        docker-compose up -d ile ayaga kaldiriyoruz
+        docker ps ile container lari listeliyoruz
+        docker exec -it <cont_id> bash baglaniyoruz
 
-Docker Desktop(Windows) indirelim ve kuralım. </br>
-Kurulum sonrasında Docker Desktop uygulamamızı açalım ve sağ üstteki ikona tıklayarak ayarlar menüsüne gidelim. </br></br>
-General bbölümünde 'Use WSL 2 ve Use Docker Compose V2' seçili olsun. </br></br>
-Ardından Resources - WSL Integration kısmında Ubuntu seçeneğini aktif edelim.</br></br>
-nginx defaulta ayaga kalkacak path, domain ve php surumunu veriyoruz ve ../etc/hosts a ayni domaini veriyoruz. </br></br>
-docker-compose up -d ile ayaga kaldiriyoruz docker ps ile docker daki container lara bakip ilgili container in id sine docker exec -it "id" bash ile baglaniyoruz daha sonra cd ile iligli laravel klasorumuze giriyoruz</br>
+        docker-compose stop
+        docker-compose down
+        docker-compose up -d --build
+        docker-compose build --no-cache
 
-docker-compose stop </br>
-docker-compose down</br>
-docker-compose up -d --build</br>
-docker-compose build --no-cache</br></br>
+10. laravel .env de
 
-## laravel env de ise
+        app_url="url", (http://project.test)
+        db_host=mysql, (yml icinde verilen ad)
+        db_password="pass" (12345678)
 
-app_url="url", (http://eloquent.com) </br>
-db_host=mysql, (yml icinde verilen ad) </br>
-db_password="pass" (12345678) </br></br></br></br>
+11. vscode permission hatasi
 
-# D. Proje Klonlama & Hata Giderme </br>
+        sudo chown -R okanaras /home/okanaras
+        sudo chown -R okanaras:okanaras
 
-## 1- projeyi klonlamak icin once ubuntu dan home/okanaras 'a docker-mysql klonla.</br>
+12. The stream or file "/var/www/html/yazilim_egitim_blog/storage/logs/laravel.log" could not be opened in append
 
-git clone https://github.com/okanaras/docker-mysql.git</br></br>
+        sudo chmod -R 777 storage/
 
-## 2- Projelerini cekmek icin docker a baglan ve terminale </br>
+13. The /var/www/html/yazilim_egitim_blog/bootstrap/cache directory must be present and writable.
 
-docker ps -> docker exec -it "id" bash -> git clone https://github.com/okanaras/yazilim_egitim_blog.git </br></br>
+        sudo chmod -R 777 bootstrap/cache/
 
-## 3- egerki vs code'tayken permission hatasi varsa bu kodu ubuntu terminale yapistir</br>
+14. SQLSTATE[HY000]General Error: 8 attempt to write a readonly database
 
-sudo chown -R okanaras /home/okanaras</br></br>
+        sudo chmod -R 777 database
 
-## 5- The stream or file "/var/www/html/yazilim_egitim_blog/storage/logs/laravel.log" could not be opened in append'</br>
+15. Termiminalde laravel not found icin php klasorlerindeki dockerfile dosyalarina asagidakini ekle
 
-sudo chmod -R 775 storage/</br></br>
+        ENV PATH="/root/.composer/vendor/bin:${PATH}"
 
-## 6- The /var/www/html/yazilim_egitim_blog/bootstrap/cache directory must be present and writable. </br>
+16. Ek bilgi
 
-sudo chmod -R 775 bootstrap/cache/ </br></br>
+        sudo usermod -aG www-data okanaras
 
-## 6- SQLSTATE[HY000]General Error: 8 attempt to write a readonly database</br>
+        umask olayı ise; projeleriniz /home/okanaras/my-projects/projects içinde.
+        Öyleyse projects klasöründe iken mesela şöyle yaparsanız:
 
-sudo chmod -R 775 database </br></br>
+        '$ umask 022'
+        '$ git clone git@github.com:username/test-project.git'
 
-## 7- termiminalde laravel not found icin php dockerfile dosyalarina asagidakini ekle </br>
-
-ENV PATH="/root/.composer/vendor/bin:${PATH}"</br></br>
-
-## 8- ek bilgi </br>
-
-sudo usermod -aG www-data okanaras </br>
-
-umask olayı ise; projeleriniz /home/okanaras/my-projects/projects içinde. Öyleyse projects klasöründe iken mesela şöyle yaparsanız: </br>
-
-'$ umask 022' </br>
-'$ git clone git@github.com:username/test-project.git' </br>
-
-Klon işlemi test-project diye bir klasör oluştururken önce umask 022 yaptığınız için dosya ve klasörleri doğru okuma yazma izinleri ile oluşturur. Yapmazsanız git içinde tanımlı izinler ile oluşturur ve daha sonra o dosyalarda düzenleme yapamazsınız.</br></br>
+        Klon işlemi test-project diye bir klasör oluştururken önce umask 022 yaptığınız için dosya ve klasörleri doğru okuma yazma izinleri ile oluşturur.
+        Yapmazsanız git içinde tanımlı izinler ile oluşturur ve daha sonra o dosyalarda düzenleme yapamazsınız.
