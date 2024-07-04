@@ -40,7 +40,18 @@
         wsl --list
         wsl --unregister Ubuntu
 
-7.  Github Kurulumu
+7.  Memory Limits in WSL 2
+
+        Ubuntu terminalinde `free -h --giga` ile check ediyoruz.
+        Powershell `notepad "C:\Users\{username}\.wslconfig"` ile dosyasini olusturup icerisine :
+
+        [wsl2]
+        memory=8GB
+
+        Daha sonra Powershell deyken `wsl --shutdown` komutunu calistiriyoruz.
+        En son wsl e baglanip tekrardan yukardak komut ile check ediyoruz
+
+8.  Github Kurulumu
 
         sudo apt install git
         git --version
@@ -49,7 +60,7 @@
         git config --global init.defaultBranch main
         cat ~/.gitconfig
 
-8.  SSH kurulumu
+9.  SSH kurulumu
 
         ssh-keygen -t rsa -b 4096 -C "okanaras"
         code ~//.ssh/id_rsa.pub
@@ -57,7 +68,7 @@
         ssh -T git@github.com
         yes
 
-9.  Docker Desktop
+10. Docker Desktop
 
         General bölümünde 'Use WSL 2 ve Use Docker Compose V2' seçili olsun.
         Resources -> WSL Integration bölümünde Ubuntu seçeneğini aktif edelim.
@@ -73,34 +84,38 @@
         docker-compose up -d --build
         docker-compose build --no-cache
 
-10. laravel .env de
+11. laravel .env de
 
         app_url="url", (http://project.test)
-        db_host=mysql, (yml icinde verilen ad)
+        db_host=mysql, (yml icinde verilen ad (or:mysql8.1,okansql))
         db_password="pass" (12345678)
 
-11. vscode permission hatasi
+12. vscode permission hatasi: docker a baglandiktan sonra
+
+        adduser okanaras
+        parola verdikten sonra cikan sorulara enter enter enter deyip
+        su okanaras
 
         sudo chown -R okanaras /home/okanaras
         sudo chown -R okanaras:okanaras
 
-12. The stream or file "/var/www/html/yazilim_egitim_blog/storage/logs/laravel.log" could not be opened in append
+13. The stream or file "/var/www/html/yazilim_egitim_blog/storage/logs/laravel.log" could not be opened in append
 
         sudo chmod -R 777 storage/
 
-13. The /var/www/html/yazilim_egitim_blog/bootstrap/cache directory must be present and writable.
+14. The /var/www/html/yazilim_egitim_blog/bootstrap/cache directory must be present and writable.
 
         sudo chmod -R 777 bootstrap/cache/
 
-14. SQLSTATE[HY000]General Error: 8 attempt to write a readonly database
+15. SQLSTATE[HY000]General Error: 8 attempt to write a readonly database
 
         sudo chmod -R 777 database
 
-15. Termiminalde laravel not found icin php klasorlerindeki dockerfile dosyalarina asagidakini ekle
+16. Termiminalde laravel not found icin php klasorlerindeki dockerfile dosyalarina asagidakini ekle
 
         ENV PATH="/root/.composer/vendor/bin:${PATH}"
 
-16. Ek bilgi
+17. Ek bilgi
 
         sudo usermod -aG www-data okanaras
 

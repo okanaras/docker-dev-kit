@@ -82,7 +82,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     environment:
-      PMA_HOST: mysql # burada hangi mysql i kullanacagimizi soyluyoruz. Su an icin mysql yani mysql5.7 yi kullandiriyorum. mysql8.1 de yazabilirdim
+      PMA_HOST: mysql8.1 # burada hangi mysql i kullanacagimizi soyluyoruz. Su an icin mysql yani mysql8.1 yi kullandiriyorum. mysql5.7 de yazabilirdim
       # PMA_USER: root
       # PMA_PASSWORD: "12345678"
     depends_on:
